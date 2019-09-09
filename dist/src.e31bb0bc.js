@@ -34018,7 +34018,7 @@ var _shallowEqual = _interopRequireDefault(require("./utils/shallowEqual"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _batch.setBatch)(_reactBatchedUpdates.unstable_batchedUpdates);
-},{"./components/Provider":"../node_modules/react-redux/es/components/Provider.js","./components/connectAdvanced":"../node_modules/react-redux/es/components/connectAdvanced.js","./components/Context":"../node_modules/react-redux/es/components/Context.js","./connect/connect":"../node_modules/react-redux/es/connect/connect.js","./hooks/useDispatch":"../node_modules/react-redux/es/hooks/useDispatch.js","./hooks/useSelector":"../node_modules/react-redux/es/hooks/useSelector.js","./hooks/useStore":"../node_modules/react-redux/es/hooks/useStore.js","./utils/batch":"../node_modules/react-redux/es/utils/batch.js","./utils/reactBatchedUpdates":"../node_modules/react-redux/es/utils/reactBatchedUpdates.js","./utils/shallowEqual":"../node_modules/react-redux/es/utils/shallowEqual.js"}],"App.js":[function(require,module,exports) {
+},{"./components/Provider":"../node_modules/react-redux/es/components/Provider.js","./components/connectAdvanced":"../node_modules/react-redux/es/components/connectAdvanced.js","./components/Context":"../node_modules/react-redux/es/components/Context.js","./connect/connect":"../node_modules/react-redux/es/connect/connect.js","./hooks/useDispatch":"../node_modules/react-redux/es/hooks/useDispatch.js","./hooks/useSelector":"../node_modules/react-redux/es/hooks/useSelector.js","./hooks/useStore":"../node_modules/react-redux/es/hooks/useStore.js","./utils/batch":"../node_modules/react-redux/es/utils/batch.js","./utils/reactBatchedUpdates":"../node_modules/react-redux/es/utils/reactBatchedUpdates.js","./utils/shallowEqual":"../node_modules/react-redux/es/utils/shallowEqual.js"}],"components/Title.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34030,13 +34030,143 @@ var _react = _interopRequireDefault(require("react"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var Title = function Title() {
+  return _react.default.createElement("div", null, _react.default.createElement("h1", null, "BOOK SEARCH"));
+};
+
+var _default = Title;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js"}],"constants/actionTypes.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.UPDATE_INPUT = void 0;
+var UPDATE_INPUT = 'UPDATE_INPUT';
+exports.UPDATE_INPUT = UPDATE_INPUT;
+},{}],"actions/actions.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.updateInput = void 0;
+
+var types = _interopRequireWildcard(require("../constants/actionTypes.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+var updateInput = function updateInput(input) {
+  return {
+    type: types.UPDATE_INPUT,
+    payload: input
+  };
+};
+
+exports.updateInput = updateInput;
+},{"../constants/actionTypes.js":"constants/actionTypes.js"}],"components/SearchBar.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var SearchBar = function SearchBar(props) {
+  var value = props.value,
+      handleChange = props.handleChange;
+  return _react.default.createElement("div", null, _react.default.createElement("input", {
+    value: value,
+    onChange: function onChange(e) {
+      return handleChange(e.target.value);
+    }
+  }));
+};
+
+var _default = SearchBar;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js"}],"containers/SearchBarContainer.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _reactRedux = require("react-redux");
+
+var actions = _interopRequireWildcard(require("../actions/actions.js"));
+
+var _SearchBar = _interopRequireDefault(require("../components/SearchBar.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var SearchBarContainer = function SearchBarContainer(props) {
+  return _react.default.createElement("div", null, _react.default.createElement(_SearchBar.default, {
+    value: props.input,
+    handleChange: props.updateInput
+  }));
+};
+
+var mapStateToProps = function mapStateToProps(store) {
+  return {
+    input: store.currentSearch
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    updateInput: function updateInput(input) {
+      dispatch(actions.updateInput(input));
+    }
+  };
+};
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(SearchBarContainer);
+
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","react-redux":"../node_modules/react-redux/es/index.js","../actions/actions.js":"actions/actions.js","../components/SearchBar.js":"components/SearchBar.js"}],"containers/BookListContainer.js":[function(require,module,exports) {
+
+},{}],"App.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _Title = _interopRequireDefault(require("./components/Title"));
+
+var _SearchBarContainer = _interopRequireDefault(require("./containers/SearchBarContainer"));
+
+var _BookListContainer = _interopRequireDefault(require("./containers/BookListContainer"));
+
+var _SearchBar = _interopRequireDefault(require("./components/SearchBar"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var App = function App() {
-  return _react.default.createElement("div", null, _react.default.createElement("p", null, "Book Search"));
+  return _react.default.createElement("div", null, _react.default.createElement(_Title.default, null), _react.default.createElement(_SearchBarContainer.default, null));
 };
 
 var _default = App;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"../node_modules/redux-devtools-extension/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./components/Title":"components/Title.js","./containers/SearchBarContainer":"containers/SearchBarContainer.js","./containers/BookListContainer":"containers/BookListContainer.js","./components/SearchBar":"components/SearchBar.js"}],"../node_modules/redux-devtools-extension/index.js":[function(require,module,exports) {
 "use strict";
 
 var compose = require('redux').compose;
@@ -34058,7 +34188,35 @@ exports.devToolsEnhancer = (
     function() { return function(noop) { return noop; } }
 );
 
-},{"redux":"../node_modules/redux/es/redux.js"}],"reducers/combineReducers.js":[function(require,module,exports) {
+},{"redux":"../node_modules/redux/es/redux.js"}],"reducers/inputReducer.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+var types = _interopRequireWildcard(require("../constants/actionTypes.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _default() {
+  var prevState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case types.UPDATE_INPUT:
+      return action.payload;
+
+    default:
+      return prevState;
+  }
+}
+},{"../constants/actionTypes.js":"constants/actionTypes.js"}],"reducers/bookListReducer.js":[function(require,module,exports) {
+
+},{}],"reducers/combineReducers.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34068,10 +34226,19 @@ exports.default = void 0;
 
 var _redux = require("redux");
 
-var _default = (0, _redux.combineReducers)({});
+var _inputReducer = _interopRequireDefault(require("./inputReducer"));
+
+var _bookListReducer = _interopRequireDefault(require("./bookListReducer"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _default = (0, _redux.combineReducers)({
+  input: _inputReducer.default,
+  bookList: _bookListReducer.default
+});
 
 exports.default = _default;
-},{"redux":"../node_modules/redux/es/redux.js"}],"store.js":[function(require,module,exports) {
+},{"redux":"../node_modules/redux/es/redux.js","./inputReducer":"reducers/inputReducer.js","./bookListReducer":"reducers/bookListReducer.js"}],"store.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
