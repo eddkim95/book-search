@@ -1,5 +1,5 @@
 import * as types from '../constants/actionTypes.js';
-import { paramify } from '../utils';
+import { paramify, enqueueRequest } from '../utils';
  
 export function updateInput(input) {
   return {
@@ -15,13 +15,24 @@ export function updateBookList(bookList) {
   }
 }
 
-export function updateSearch(input) {
-  return (dispatch) => {
-    dispatch(updateInput(input));
-    fetch(`http://openlibrary.org/search.json?title=${paramify(input)}`)
-      .then(res => res.json())
-      .then(response => {
-        return dispatch(updateBookList(response.docs))
-      })
+export function updateSearch() {
+  return (dispatch, getState) => {
+    function getBooks() {
+      fetch(`http://openlibrary.org/search.json${paramify(getState().input)}`)
+        .then(res => {
+          console.log(res.status)
+          return res.json()
+        })
+        .then(response => {
+          console.log(response)
+          return dispatch(updateBookList(response.docs))
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+    // Reduces requests by fetching only after 500ms have elapsed since last keystroke
+    clearTimeout(enqueueRequest());
+    enqueueRequest(setTimeout(getBooks, 500));
   }
 }

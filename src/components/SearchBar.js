@@ -1,13 +1,16 @@
 import React from 'react';
 
 const SearchBar = (props) => {
-  const { value, handleChange } = props;
+  const { value, updateInput, updateSearch } = props;
   
   return (
     <div>
       <input
         value={value}
-        onChange={(e) => handleChange(e.target.value)}
+        onChange={(e) => {
+          updateInput(e.target.value);
+          updateSearch();
+        }}
       />
     </div>
   )
