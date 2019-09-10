@@ -2,6 +2,7 @@ import React from 'react';
 
 const SearchBar = (props) => {
   const { value, handleChange } = props;
+  
   return (
     <div>
       <input

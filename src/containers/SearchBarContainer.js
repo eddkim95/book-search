@@ -8,22 +8,20 @@ const SearchBarContainer = (props) => {
     <div>
       <SearchBar
         value={props.input}
-        handleChange={props.updateInput}
+        handleChange={props.updateSearch}
       />
     </div>
   )
 }
 
 const mapStateToProps = (store) => ({
-  input: store.currentSearch,
-
+  input: store.input,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  updateInput: (input) => {
-    dispatch(actions.updateInput(input))
+  updateSearch: (input) => {
+    dispatch(actions.updateSearch(input))
   },
-
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBarContainer);

@@ -2,7 +2,6 @@ import React from 'react';
 import Title from './components/Title';
 import SearchBarContainer from './containers/SearchBarContainer';
 import BookListContainer from './containers/BookListContainer';
-import SearchBar from './components/SearchBar'
 
 
 const App = () => {
@@ -10,6 +9,7 @@ const App = () => {
     <div>
       <Title />
       <SearchBarContainer />
+      <BookListContainer />
     </div>
   )
 }
