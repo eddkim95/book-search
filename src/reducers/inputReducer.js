@@ -1,10 +1,10 @@
 import * as types from '../constants/actionTypes.js';
 
-export default function(prevState = "", action) {
+export default function(state = "", action) {
   switch(action.type) {
     case types.UPDATE_INPUT: 
       return action.payload;
     default:
-      return prevState;
+      return state;
   }
 }

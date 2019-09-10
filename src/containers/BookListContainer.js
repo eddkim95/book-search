@@ -12,12 +12,12 @@ const BookListContainer = (props) => {
   )
 }
 
-const mapStateToProps = (store) => ({
-  bookList: store.bookList,
-})
+const mapStateToProps = (store) => {
+  const { cachedPages, currentPage, books } = store.bookList;
+  return {
+    bookList: cachedPages[currentPage] ? cachedPages[currentPage] : books,
+  }
+}
 
-const mapDispatchToProps = (dispatch) => ({
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(BookListContainer);
+export default connect(mapStateToProps, null)(BookListContainer);
 

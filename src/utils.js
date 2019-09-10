@@ -2,8 +2,9 @@
 let queuedRequest = null;
 
 // Helper function to append 'title' query param to fetch request
-export const paramify = (input) => {
-  return `?title=${input.split(' ').join('+')}`;
+export const paramify = (params) => {
+  const { input, newPage } = params;
+  return `?title=${input.split(' ').join('+')}&page=${newPage ? newPage : 1}&has_fulltext=true`;
 }
 
 export const enqueueRequest = (newRequest) => {
