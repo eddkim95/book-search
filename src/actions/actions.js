@@ -2,9 +2,10 @@ import * as types from '../constants/actionTypes.js';
 import { paramify, enqueueRequest } from '../utils';
  
 export function updateInput(input) {
+  let trimmedString = input.trim()
   return {
     type: types.UPDATE_INPUT,
-    payload: input,
+    payload: trimmedString,
   }
 }
 
@@ -18,35 +19,40 @@ export function updateBookList(bookList, currentPage) {
 
 export function updateSearch(newPage) {
   return (dispatch, getState) => {
-    function fetchBooks() {
-      const { input } = getState();
-      return fetch(`http://openlibrary.org/search.json${paramify({ input, newPage })}`)
+    dispatch(loading(true));
+    const { input } = getState();
+    const fetchURL = `http://openlibrary.org/search.json${paramify({ input, newPage })}`;
+    const fetchBooks = () => {
+      return fetch(fetchURL)
         .then(res => {
-          return res.json()
+          // Open Library API returns status code 200 for empty responses, not 400
+          // Error handling done on frontend based on empty response + non-empty query
+          if (res.status == 500) throw new Error(`STATUS CODE ${res.status}`);
+          return res.json();
         })
-        .then(response => {
-          console.log(response)
-          // TODO: add error handling for docs.length = 0
-          if (response.numFound !== getState().bookList.total) dispatch(clearCache());
-          dispatch(updateBookList(response, newPage ? newPage : 1))
+        .then(fetchedBooks => {
+          // Clear cache with new query
+          if (fetchedBooks.numFound !== getState().bookList.total) dispatch(clearCache());
+          dispatch(updateBookList(fetchedBooks, newPage ? newPage : 1));
+          dispatch(loading(false));
         })
         .catch(err => {
-          // TODO: handle empty query
-          console.log(err)
+          console.error('Error:', err.message);
+          alert('Please try another query.');
         })
     }
-
+    // newPage argument undefined for initial query, otherwise fetch new page or set/retrieve paginated response from cache
     if (!newPage) {
-      // Reduces requests by fetching only after 500ms have elapsed since last keystroke
+      // Reduces requests by fetching only after 250ms have elapsed since last keystroke
       clearTimeout(enqueueRequest());
-      enqueueRequest(setTimeout(fetchBooks, 500));
+      enqueueRequest(setTimeout(fetchBooks, 250));
     } else if (!getState().bookList.cachedPages[newPage]) {
       fetchBooks();
     }
   }
 }
 
-// TODO: document
+// Sets bookList.currentPage w/o fetch new page; frontend refers to cache
 export function useCache(cachedPage) {
   return {
     type: types.USE_CACHE,
@@ -57,5 +63,13 @@ export function useCache(cachedPage) {
 export function clearCache() {
   return {
     type: types.CLEAR_CACHE,
+  }
+}
+
+// Informs frontend whether to load loading state component
+export function loading(isRequesting) {
+  return {
+    type: types.LOADING_STATUS,
+    isRequesting,
   }
 }

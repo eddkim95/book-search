@@ -1,7 +1,11 @@
 import React from 'react';
 
 const SearchBar = (props) => {
-  const { value, updateInput, updateSearch } = props;
+  const {
+    value,
+    updateInput,
+    updateSearch
+  } = props;
   
   return (
     <div>
@@ -11,6 +15,7 @@ const SearchBar = (props) => {
           updateInput(e.target.value);
           updateSearch();
         }}
+        placeholder='ie. Lord of the Rings'
       />
     </div>
   )

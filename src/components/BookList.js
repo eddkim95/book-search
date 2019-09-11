@@ -1,8 +1,11 @@
 import React from 'react';
-import Book from './Book';
+import Book from './Book.js';
 
 const BookList = (props) => {
-  const { bookList } = props;
+  const {
+    bookList
+  } = props;
+  
   return (
     <div>
       {bookList.map((book, i) => {

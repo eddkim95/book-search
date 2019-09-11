@@ -2,18 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions.js';
 import SearchBar from '../components/SearchBar.js';
-import PageSearch from '../components/PageSearch'
+import PageSearch from '../components/PageSearch.js'
 
 const SearchBarContainer = (props) => {
   const {
     input,
     updateInput,
     updateSearch,
-    currentPage,
     pages,
     useCache
   } = props;
 
+  // Conditionally render UI for flipping pages
   return (
     <div>
       <SearchBar
@@ -21,15 +21,14 @@ const SearchBarContainer = (props) => {
         updateInput={updateInput}
         updateSearch={updateSearch}
       />
-      {pages ?
+      { pages ?
         <PageSearch
           pages={pages}
           cachedPages={props.cachedPages}
           updateSearch={updateSearch}
           useCache={useCache}
         /> :
-        null
-      }
+        null }
     </div>
   )
 }
@@ -42,6 +41,7 @@ const mapStateToProps = (store) => {
       cachedPages,
     }
   } = store;
+
   return {
     input,
     pages,

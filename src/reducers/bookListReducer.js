@@ -6,6 +6,7 @@ const defaultState = {
   currentPage: 0,
   books: [],
   cachedPages: {},
+  isRequesting: false,
 }
 
 export default function(state = defaultState, action) {
@@ -24,12 +25,18 @@ export default function(state = defaultState, action) {
       })
     case types.USE_CACHE:
       const { cachedPage } = action;
+      // Booklist renders cached current page after page is set
       return Object.assign({}, state, {
         currentPage: cachedPage,
       })
     case types.CLEAR_CACHE:
       return Object.assign({}, state, {
         cachedPages: [],
+      })
+    case types.LOADING_STATUS:
+      const { isRequesting } = action;
+      return Object.assign({}, state, {
+        isRequesting,
       })
     default:
       return state;
