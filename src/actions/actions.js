@@ -2,7 +2,7 @@ import * as types from '../constants/actionTypes.js';
 import { paramify, enqueueRequest } from '../utils';
  
 export function updateInput(input) {
-  let trimmedString = input.trim()
+  let trimmedString = input.trimLeft()
   return {
     type: types.UPDATE_INPUT,
     payload: trimmedString,

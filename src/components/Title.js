@@ -2,8 +2,8 @@ import React from 'react';
 
 const Title = () => {
   return (
-    <div>
-      <h1>BOOK SEARCH</h1>
+    <div id="title">
+      <text>Book Search</text>
     </div>
   )
 }

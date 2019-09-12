@@ -1,0 +1,78 @@
+#appContainer {
+  width: 600px;
+  margin: auto;
+  padding: 40px;
+}
+
+text, select {
+  font-family: 'Work Sans', sans-serif;
+}
+
+select {
+  font-size: 16px;
+}
+
+#title {
+  color: rgb(60, 60, 60);
+  font-size: 70px;
+  background-color: rgb(255, 255, 255);
+  margin-bottom: 5px;
+}
+
+#searchBar {
+  width: 95%;
+  height: 30px;
+  outline: none;
+  border: solid rgb(60, 60, 60) 5px;
+  border-radius: 30px;
+  padding: 10px;
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background:rgb(60, 60, 60); 
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background:rgb(60, 60, 60); 
+}
+
+#pageSearch {
+  font-size: 20px;
+  text-align: right;
+  margin-bottom: 10px;
+}
+
+#error {
+  text-align: center;
+  font-size: 30px;
+}
+
+#bookList {
+  overflow-y: scroll;
+  height: 550px;
+}
+
+.book {
+  margin-bottom: 20px;
+}
+
+.bookTitle {
+  text-transform: capitalize;
+  font-size: 23px;
+  font-style: italic;
+}
+
+.bookAuthor {
+  font-size: 20px;
+}

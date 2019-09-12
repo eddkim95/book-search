@@ -20,8 +20,8 @@ const PageSearch = (props) => {
     });
 
   return (
-    <div>
-      Page: 
+    <div id='pageSearch'>
+      <text>Page: </text>
       <span><select
         onChange={(e) => {
           const newPage = e.target.value;
@@ -30,7 +30,7 @@ const PageSearch = (props) => {
         }}>
         {pageDropDown}
       </select></span>
-      of {pages}
+      <text> of {pages}</text>
     </div>
   )
 }

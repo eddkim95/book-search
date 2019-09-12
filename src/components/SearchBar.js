@@ -16,6 +16,7 @@ const SearchBar = (props) => {
           updateSearch();
         }}
         placeholder='ie. Lord of the Rings'
+        id='searchBar'
       />
     </div>
   )
